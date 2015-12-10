@@ -32,11 +32,14 @@ use warnings;
 # create a new image
 $srcimage = GD::Image->newFromJpeg('apod-view.widget/imgfull.jpg');
 ($srcW, $srcH) = $srcimage->getBounds();
+# temp manual setting $srcW, $srcH
+#my $srcW = 2770;
+#my $srcH = 1674;
 
 my $maxwidth = 1680; # your screen width <--- modify to suit
 my $maxheight = 1050; # your screen height <--- modify to suit
-my $wdiff = $srcW - $maxwidth;
-my $hdiff = $srcH - $maxheight;
+my $wdiff = $maxwidth/$srcW;
+my $hdiff = $maxheight/$srcH;
 my $newW;
 my $newH;
 
