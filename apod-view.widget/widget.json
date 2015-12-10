@@ -1,6 +1,6 @@
 {
   "name": "APOD View widget",
-  "description": "From the Earth View widget idea comes this; the APOD (Astronomy Picture of the Day) widget. My first attempt at Perl and Coffee",
+  "description": "From the Earth View widget idea comes this; the APOD (Astronomy Picture of the Day) widget. My first attempt at Perl and Coffee. Requires GD and Perl",
   "author": "Skunk",
   "email": "apodwidget@skunkworks.net.nz"
 }
