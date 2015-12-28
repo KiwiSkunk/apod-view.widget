@@ -7,7 +7,7 @@
 command: "perl -w 'apod-view.widget/apod.pl'";
 
 # Set the refresh frequency (milliseconds).
-refreshFrequency: 86400000
+refreshFrequency: 43200000
 
 style: """
   top: 0%

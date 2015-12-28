@@ -14,27 +14,33 @@ my $baseurl = "http://apod.nasa.gov/apod";
 # Grab the line that has the link to the big picture.
 my @line = grep m/href=\"image/i, qx(curl -s $baseurl/astropix.html);
 
-# Grab the actual link to the image.
-$_ = $line[0];
-/"image\/([^\/]+)\/([^\/]+)\.([^\.]+)"/;
-my $link = "$1/$2\.$3";
-my $picture = $baseurl."/image/".$link;
-qx(curl -s -o ~/Library/Application\\ Support/\xC3\x9Cbersicht/widgets/apod-view.widget/imgfull.jpg $picture);
+# need to check we have a jpg
+# and load a backup image if we don't
+if ($line[0]) {
+	# Grab the actual link to the image.
+	$_ = $line[0];
+	/"image\/([^\/]+)\/([^\/]+)\.([^\.]+)"/;
+	my $link = "$1/$2\.$3";
+	my $picture = $baseurl."/image/".$link;
+	qx(curl -s -o ~/Library/Application\\ Support/\xC3\x9Cbersicht/widgets/apod-view.widget/imgfull.jpg $picture);
+	# ensure download is complete
+	sleep (5);
+	chdir "~/Library/Application\\ Support/\xC3\x9Cbersicht/widgets/apod-view.widget//";
+	# resize the image
+	use GD;
+	use warnings;
+	# create a new image
+	$srcimage = GD::Image->newFromJpeg('apod-view.widget/imgfull.jpg');
+} else {
+	chdir "~/Library/Application\\ Support/\xC3\x9Cbersicht/widgets/apod-view.widget//";
+	# resize the image
+	use GD;
+	use warnings;
+	# create a new image
+	$srcimage = GD::Image->newFromJpeg('apod-view.widget/default.jpg');
+}
 
-# ensure download is complete
-sleep (5);
-chdir "~/Library/Application\\ Support/\xC3\x9Cbersicht/widgets/apod-view.widget//";
-
-# resize the image
-use GD;
-use warnings;
-
-# create a new image
-$srcimage = GD::Image->newFromJpeg('apod-view.widget/imgfull.jpg');
 ($srcW, $srcH) = $srcimage->getBounds();
-# temp manual setting $srcW, $srcH
-#my $srcW = 2770;
-#my $srcH = 1674;
 
 my $maxwidth = 1680; # your screen width <--- modify to suit
 my $maxheight = 1050; # your screen height <--- modify to suit
