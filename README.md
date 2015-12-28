@@ -1,6 +1,9 @@
 # apod-view.widget
 Übersicht APOD desktop picture
 
+What's new
+Uses a default image if the APOD is a video. Updates twice a day.
+
 This widget requires the GD library and Perl to be installed. 
 It accesses the http://apod.nasa.gov/apod website and grabs the current picture of the day.
 This is downloaded and resized and placed in as your wallpaper. If it is a video it uses a default image instead.
