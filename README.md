@@ -3,6 +3,7 @@
 Updated 13 Jan 2016
 
 What's new
+
 Better centrering of the cropped image.
 
 This widget requires the GD library and Perl to be installed. 
