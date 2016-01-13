@@ -10,6 +10,11 @@
 # Modified again by Harold Bakker, 12-01-2005
 # Modified by Skunkworks Group 13 Jan 2016
 
+my $maxwidth = 1680; # your screen width <--- modify to suit
+my $maxheight = 1050; # your screen height <--- modify to suit
+# End of variables to modify
+
+# url for the images
 my $baseurl = "http://apod.nasa.gov/apod";
 # Grab the line that has the link to the big picture.
 my @line = grep m/href=\"image/i, qx(curl -s $baseurl/astropix.html);
@@ -22,7 +27,7 @@ my $picture = $baseurl."/image/".$link;
 qx(curl -s -o ~/Library/Application\\ Support/\xC3\x9Cbersicht/widgets/apod-view.widget/imgfull.jpg $picture);
 
 # ensure download is complete
-sleep (5);
+sleep (0);
 chdir "~/Library/Application\\ Support/\xC3\x9Cbersicht/widgets/apod-view.widget//";
 
 # resize the image
@@ -33,8 +38,6 @@ use warnings;
 $srcimage = GD::Image->newFromJpeg('apod-view.widget/imgfull.jpg');
 ($srcW, $srcH) = $srcimage->getBounds();
 
-my $maxwidth = 2560; # your screen width <--- modify to suit
-my $maxheight = 1440; # your screen height <--- modify to suit
 my $wdiff = $maxwidth/$srcW;
 my $hdiff = $maxheight/$srcH;
 my $newW;
@@ -46,14 +49,14 @@ my $srcY = 0;
 
 if ($wdiff > $hdiff) {
     $newW = $maxwidth;
-    $aspect = ($newW/$srcW);
+    $aspect = $newW / $srcW;
+    $dstY = int((($srcH - $maxheight) * $aspect) * 2);
     $newH = int($srcH * $aspect);
-    $dstY = int((($maxheight-$srcH)*$aspect)/2);
 } else {
     $newH = $maxheight;
-    $aspect = ($newH/$srcH);
+    $aspect = $newH / $srcH;
+    $dstX = int((($srcW - $maxwidth) * $aspect) * 2);
     $newW = int($srcW * $aspect);
-    $dstX = int((($maxwidth-$srcW)*$aspect)/2);
 }
 
 
