@@ -69,12 +69,12 @@ my $srcY = 0;
 if ($wdiff > $hdiff) {
     $newW = $maxwidth;
     $aspect = $newW / $srcW;
-    $dstY = int((($srcH - $maxheight) * $aspect) * 2);
+    $dstY = int((($srcH - $maxheight) * $aspect) / 2);
     $newH = int($srcH * $aspect);
 } else {
     $newH = $maxheight;
     $aspect = $newH / $srcH;
-    $dstX = int((($srcW - $maxwidth) * $aspect) * 2);
+    $dstX = int((($srcW - $maxwidth) * $aspect) / 2);
     $newW = int($srcW * $aspect);
 }
 
