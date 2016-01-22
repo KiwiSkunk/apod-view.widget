@@ -10,8 +10,8 @@
 # Modified again by Harold Bakker, 12-01-2005
 # Modified by Skunkworks Group 13 Jan 2016
 
-my $maxwidth = 1680; # your screen width <--- modify to suit
-my $maxheight = 1050; # your screen height <--- modify to suit
+my $maxwidth = 2560; # your screen width <--- modify to suit
+my $maxheight = 1440; # your screen height <--- modify to suit
 # End of variables to modify
 
 # url for the images
@@ -66,16 +66,16 @@ my $dstY = 0;
 my $srcX = 0;
 my $srcY = 0;
 
-if ($wdiff > $hdiff) {
+if ($wdiff >= $hdiff) {
     $newW = $maxwidth;
     $aspect = $newW / $srcW;
-    $dstY = int((($srcH - $maxheight) * $aspect) / 2);
     $newH = int($srcH * $aspect);
+    $dstY = int($maxheight - $newH)/2;
 } else {
     $newH = $maxheight;
     $aspect = $newH / $srcH;
-    $dstX = int((($srcW - $maxwidth) * $aspect) / 2);
     $newW = int($srcW * $aspect);
+    $dstX = int($maxwidth - $newW)/2;
 }
 
 
