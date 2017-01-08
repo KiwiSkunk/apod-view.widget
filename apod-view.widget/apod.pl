@@ -15,7 +15,7 @@ my $maxheight = 1050; # your screen height <--- modify to suit
 # End of variables to modify
 
 # url for the images
-my $baseurl = "http://apod.nasa.gov/apod";
+my $baseurl = "https://apod.nasa.gov/apod";
 # Grab the line that has the link to the big picture.
 my @line = grep m/href=\"image/i, qx(curl -s $baseurl/astropix.html);
 
@@ -54,7 +54,6 @@ use GD;
 use warnings;
 
 # create a new image
-$srcimage = GD::Image->newFromJpeg('apod-view.widget/imgfull.jpg');
 ($srcW, $srcH) = $srcimage->getBounds();
 
 my $wdiff = $maxwidth/$srcW;
@@ -69,13 +68,13 @@ my $srcY = 0;
 if ($wdiff > $hdiff) {
     $newW = $maxwidth;
     $aspect = $newW / $srcW;
-    $dstY = int((($srcH - $maxheight) * $aspect) * 2);
     $newH = int($srcH * $aspect);
+    $dstY = int($maxheight - $newH)/2;
 } else {
     $newH = $maxheight;
     $aspect = $newH / $srcH;
-    $dstX = int((($srcW - $maxwidth) * $aspect) * 2);
     $newW = int($srcW * $aspect);
+    $dstX = int($maxwidth - $newW)/2;
 }
 
 

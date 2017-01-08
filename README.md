@@ -1,13 +1,14 @@
 # apod-view.widget
 Übersicht APOD desktop picture
-Updated 13 Jan 2016
+Updated 8 Jan 2017
 
 What's new
 
-Better centrering of the cropped image.
+Better centering of the cropped image.
+NASA moved the image location so the script has been updated to fix this.
 
 This widget requires the GD library and Perl to be installed. 
-It accesses the http://apod.nasa.gov/apod website and grabs the current picture of the day.
+It accesses the https://apod.nasa.gov/apod website and grabs the current picture of the day.
 This is downloaded and resized and placed in as your wallpaper. If it is a video it uses a default image instead.
 
 Configuration
